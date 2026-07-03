@@ -3,7 +3,7 @@ name: Deploy frontend to GitHub Pages
 on:
   push:
     branches:
-      - cristian
+      - dev
   workflow_dispatch:
 
 permissions:
