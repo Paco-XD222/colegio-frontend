@@ -40,7 +40,13 @@ const resources = {
   },
   contactos: {
     label: 'Contactos',
-    fields: [],
+    fields: [
+      { name: 'nombre', label: 'Nombre', required: true },
+      { name: 'correo', label: 'Correo', type: 'email', required: true },
+      { name: 'asunto', label: 'Asunto', required: true },
+      { name: 'mensaje', label: 'Mensaje', type: 'textarea', required: true },
+      { name: 'fecha', label: 'Fecha', type: 'date' },
+    ],
   },
 }
 
@@ -94,7 +100,6 @@ function Admin() {
     setLoginStatus('')
     try {
       const response = await loginUser(loginForm)
-      console.log('Respuesta login:', response)
       if (response === 'Login correcto' || response?.mensaje === 'Login correcto' || response) {
         setAuthenticated(true)
         setLoginStatus('')
@@ -235,49 +240,47 @@ function Admin() {
         ))}
       </div>
 
-      {activeResource !== 'contactos' && (
-        <form className="glass-form admin-form" onSubmit={handleSubmit}>
-          {current.fields.map((field) => (
-            <label key={field.name}>
-              {field.label}
-              {field.type === 'textarea' ? (
-                <textarea
-                  name={field.name}
-                  rows="4"
-                  value={form[field.name] ?? ''}
-                  onChange={handleFieldChange}
-                  required={field.required}
-                />
-              ) : (
-                <input
-                  name={field.name}
-                  type={field.type ?? 'text'}
-                  value={form[field.name] ?? ''}
-                  onChange={handleFieldChange}
-                  required={field.required}
-                />
-              )}
-            </label>
-          ))}
-          <div className="form-actions">
-            <button className="button primary" type="submit" disabled={loading}>
-              {editingId ? 'Actualizar' : 'Crear'}
-            </button>
-            {editingId && (
-              <button
-                className="button secondary"
-                type="button"
-                onClick={() => {
-                  setEditingId(null)
-                  setForm(formTemplate)
-                }}
-              >
-                Cancelar
-              </button>
+      <form className="glass-form admin-form" onSubmit={handleSubmit}>
+        {current.fields.map((field) => (
+          <label key={field.name}>
+            {field.label}
+            {field.type === 'textarea' ? (
+              <textarea
+                name={field.name}
+                rows="4"
+                value={form[field.name] ?? ''}
+                onChange={handleFieldChange}
+                required={field.required}
+              />
+            ) : (
+              <input
+                name={field.name}
+                type={field.type ?? 'text'}
+                value={form[field.name] ?? ''}
+                onChange={handleFieldChange}
+                required={field.required}
+              />
             )}
-          </div>
-        </form>
-      )}
+          </label>
+        ))}
+        <div className="form-actions">
+          <button className="button primary" type="submit" disabled={loading}>
+            {editingId ? 'Actualizar' : 'Crear'}
+          </button>
+          {editingId && (
+            <button
+              className="button secondary"
+              type="button"
+              onClick={() => {
+                setEditingId(null)
+                setForm(formTemplate)
+              }}
+            >
+              Cancelar
+            </button>
+          )}
+        </div>
+      </form>
 
       {status && <p className="state-message">{status}</p>}
       {loading && <p className="state-message">Cargando...</p>}
@@ -290,7 +293,7 @@ function Admin() {
               <p>
                 {pick(
                   item,
-                  ['descripcion', 'mensaje', 'materia', 'especialidad', 'telefono'],
+                  ['descripcion', 'mensaje', 'asunto', 'materia', 'especialidad', 'telefono'],
                   'Sin detalle.',
                 )}
               </p>
@@ -298,16 +301,14 @@ function Admin() {
                 <small>{pick(item, ['fecha', 'anio', 'gestion'])}</small>
               )}
             </div>
-            {activeResource !== 'contactos' && (
-              <div className="row-actions">
-                <button className="button secondary" type="button" onClick={() => handleEdit(item)}>
-                  Editar
-                </button>
-                <button className="button danger" type="button" onClick={() => handleDelete(item)}>
-                  Eliminar
-                </button>
-              </div>
-            )}
+            <div className="row-actions">
+              <button className="button secondary" type="button" onClick={() => handleEdit(item)}>
+                Editar
+              </button>
+              <button className="button danger" type="button" onClick={() => handleDelete(item)}>
+                Eliminar
+              </button>
+            </div>
           </article>
         ))}
         {!loading && items.length === 0 && (

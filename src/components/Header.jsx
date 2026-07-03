@@ -1,6 +1,6 @@
 import tigreImg from '../assets/tigre.jpg'
 
-function Header({ onNavigate }) {
+function Header({ getHref, onNavigate }) {
   return (
     <header className="site-header">
       <div className="hero-content">
@@ -13,7 +13,7 @@ function Header({ onNavigate }) {
         <div className="hero-actions">
           <a
             className="button primary"
-            href="/noticias"
+            href={getHref('/noticias')}
             onClick={(event) => {
               event.preventDefault()
               onNavigate('/noticias')
@@ -23,7 +23,7 @@ function Header({ onNavigate }) {
           </a>
           <a
             className="button secondary"
-            href="/admin"
+            href={getHref('/admin')}
             onClick={(event) => {
               event.preventDefault()
               onNavigate('/admin')
