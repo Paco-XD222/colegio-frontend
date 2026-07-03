@@ -8,16 +8,18 @@ function Layout({ children, currentPath, currentTitle, onNavigate }) {
   return (
     <div className="app-shell">
       <Navbar currentPath={currentPath} onNavigate={onNavigate} />
-      {isHome ? (
-        <Header onNavigate={onNavigate} />
-      ) : (
-        <section className="page-hero">
-          <p className="eyebrow">Colegio Carlos Medinaceli</p>
-          <h1>{currentTitle}</h1>
-        </section>
-      )}
-      <main>{children}</main>
-      <Footer />
+      <div className="content-shell">
+        {isHome ? (
+          <Header onNavigate={onNavigate} />
+        ) : (
+          <section className="page-hero">
+            <p className="eyebrow">Colegio Carlos Medinaceli</p>
+            <h1>{currentTitle}</h1>
+          </section>
+        )}
+        <main>{children}</main>
+        <Footer />
+      </div>
     </div>
   )
 }

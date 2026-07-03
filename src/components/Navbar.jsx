@@ -1,15 +1,17 @@
 const navItems = [
-  { path: '/', label: 'Inicio' },
-  { path: '/noticias', label: 'Noticias' },
-  { path: '/docentes', label: 'Docentes' },
-  { path: '/promociones', label: 'Promociones' },
-  { path: '/contacto', label: 'Contacto' },
-  { path: '/admin', label: 'Admin' },
+  { path: '/', label: 'Inicio', icon: 'IN' },
+  { path: '/historia', label: 'Historia', icon: 'HI' },
+  { path: '/noticias', label: 'Noticias', icon: 'NO' },
+  { path: '/docentes', label: 'Docentes', icon: 'DO' },
+  { path: '/promociones', label: 'Promociones', icon: 'PR' },
+  { path: '/contacto', label: 'Contacto', icon: 'CO' },
+  { path: '/ubicacion', label: 'Ubicacion', icon: 'UB' },
+  { path: '/admin', label: 'Admin', icon: 'AD' },
 ]
 
 function Navbar({ currentPath, onNavigate }) {
   return (
-    <nav className="navbar" aria-label="Navegacion principal">
+    <aside className="navbar" aria-label="Navegacion principal">
       <a
         className="brand"
         href="/"
@@ -21,7 +23,7 @@ function Navbar({ currentPath, onNavigate }) {
         <span className="brand-mark">CM</span>
         <span>
           <strong>Carlos Medinaceli</strong>
-          <small>Colegio</small>
+          <small>Menu institucional</small>
         </span>
       </a>
 
@@ -37,11 +39,12 @@ function Navbar({ currentPath, onNavigate }) {
               onNavigate(item.path)
             }}
           >
-            {item.label}
+            <span className="nav-icon">{item.icon}</span>
+            <span>{item.label}</span>
           </a>
         ))}
       </div>
-    </nav>
+    </aside>
   )
 }
 

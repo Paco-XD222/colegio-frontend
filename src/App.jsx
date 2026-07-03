@@ -3,15 +3,21 @@ import Layout from './components/Layout.jsx'
 import Admin from './pages/Admin.jsx'
 import Contacto from './pages/Contacto.jsx'
 import Docentes from './pages/Docentes.jsx'
+import Historia from './pages/Historia.jsx'
 import Home from './pages/Home.jsx'
 import Noticias from './pages/Noticias.jsx'
 import Promociones from './pages/Promociones.jsx'
+import Ubicacion from './pages/Ubicacion.jsx'
 import './App.css'
 
 const routes = {
   '/': {
     title: 'Inicio',
     element: <Home />,
+  },
+  '/historia': {
+    title: 'Historia',
+    element: <Historia />,
   },
   '/noticias': {
     title: 'Noticias',
@@ -28,6 +34,10 @@ const routes = {
   '/contacto': {
     title: 'Contacto',
     element: <Contacto />,
+  },
+  '/ubicacion': {
+    title: 'Ubicacion',
+    element: <Ubicacion />,
   },
   '/admin': {
     title: 'Administracion',

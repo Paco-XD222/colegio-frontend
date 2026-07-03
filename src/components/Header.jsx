@@ -1,17 +1,14 @@
+import tigreImg from '../assets/tigre.jpg'
+
 function Header({ onNavigate }) {
   return (
     <header className="site-header">
-      <div className="hero-media" aria-hidden="true">
-        <div className="hero-photo">
-          <div className="hero-badge">CM</div>
-        </div>
-      </div>
       <div className="hero-content">
         <p className="eyebrow">Unidad Educativa Carlos Medinaceli</p>
-        <h1>Comunidad educativa con informacion clara y gestion moderna</h1>
+        <h1>MEDINACELI</h1>
         <p className="hero-copy">
-          Portal institucional para compartir noticias, docentes, promociones y
-          canales de contacto con estudiantes, familias y administradores.
+          Portal institucional moderno para noticias, docentes, promociones,
+          contacto y administracion del Colegio Carlos Medinaceli.
         </p>
         <div className="hero-actions">
           <a
@@ -35,6 +32,9 @@ function Header({ onNavigate }) {
             Panel admin
           </a>
         </div>
+      </div>
+      <div className="hero-media">
+        <img src={tigreImg} alt="Tigre institucional con fondo de fuego" />
       </div>
     </header>
   )
