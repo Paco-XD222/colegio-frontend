@@ -29,8 +29,8 @@ function Contacto() {
       await sendContact(form)
       setStatus('Mensaje enviado correctamente.')
       setForm(initialForm)
-    } catch {
-      setStatus('No se pudo enviar el mensaje. Intenta nuevamente.')
+    } catch (apiError) {
+      setStatus(`No se pudo enviar el mensaje. ${apiError.message}`)
     } finally {
       setLoading(false)
     }

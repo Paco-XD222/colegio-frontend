@@ -88,8 +88,10 @@ function Admin() {
     try {
       const data = await listResource(resource)
       setItems(asArray(data))
-    } catch {
-      setStatus(`No se pudo cargar ${resources[resource].label.toLowerCase()}.`)
+    } catch (apiError) {
+      setStatus(
+        `No se pudo cargar ${resources[resource].label.toLowerCase()}. ${apiError.message}`,
+      )
     } finally {
       setLoading(false)
     }
@@ -105,8 +107,8 @@ function Admin() {
         setLoginStatus('')
         setLoginForm(emptyLogin)
       }
-    } catch {
-      setLoginStatus('Credenciales incorrectas o servidor no disponible.')
+    } catch (apiError) {
+      setLoginStatus(`Credenciales incorrectas o servidor no disponible. ${apiError.message}`)
     }
   }
 
@@ -132,8 +134,8 @@ function Admin() {
       setForm(formTemplate)
       setEditingId(null)
       await loadItems(activeResource)
-    } catch {
-      setStatus('No se pudo guardar el registro.')
+    } catch (apiError) {
+      setStatus(`No se pudo guardar el registro. ${apiError.message}`)
     } finally {
       setLoading(false)
     }
@@ -161,8 +163,8 @@ function Admin() {
       await deleteResource(activeResource, id)
       setStatus('Registro eliminado.')
       await loadItems(activeResource)
-    } catch {
-      setStatus('No se pudo eliminar el registro.')
+    } catch (apiError) {
+      setStatus(`No se pudo eliminar el registro. ${apiError.message}`)
     } finally {
       setLoading(false)
     }

@@ -32,7 +32,7 @@ function Docentes() {
   useEffect(() => {
     listResource('docentes')
       .then((data) => setDocentes(asArray(data)))
-      .catch(() => setError('No se pudieron cargar los docentes.'))
+      .catch((apiError) => setError(`No se pudieron cargar los docentes. ${apiError.message}`))
       .finally(() => setLoading(false))
   }, [])
 

@@ -1,17 +1,24 @@
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 async function request(path, options = {}) {
-  const response = await fetch(`${API_URL}${path}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-    ...options,
-  })
+  const url = `${API_URL}${path}`
+  let response
+
+  try {
+    response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+      ...options,
+    })
+  } catch (error) {
+    throw new Error(`No se pudo conectar con ${url}. ${error.message}`)
+  }
 
   if (!response.ok) {
     const errorText = await response.text().catch(() => '')
-    throw new Error(errorText || `Error ${response.status}`)
+    throw new Error(errorText || `Error ${response.status} en ${url}`)
   }
 
   if (response.status === 204) return null
