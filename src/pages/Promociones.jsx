@@ -26,7 +26,7 @@ function Promociones() {
   useEffect(() => {
     listResource('promociones')
       .then((data) => setPromociones(asArray(data)))
-      .catch(() => setError('No se pudieron cargar las promociones.'))
+      .catch((apiError) => setError(`No se pudieron cargar las promociones. ${apiError.message}`))
       .finally(() => setLoading(false))
   }, [])
 

@@ -26,7 +26,7 @@ function Noticias() {
   useEffect(() => {
     listResource('noticias')
       .then((data) => setNoticias(asArray(data)))
-      .catch(() => setError('No se pudieron cargar las noticias.'))
+      .catch((apiError) => setError(`No se pudieron cargar las noticias. ${apiError.message}`))
       .finally(() => setLoading(false))
   }, [])
 
