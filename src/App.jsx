@@ -45,8 +45,19 @@ const routes = {
   },
 }
 
+const basePath =
+  import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '')
+
+function stripBasePath(pathname) {
+  if (basePath && pathname.startsWith(basePath)) {
+    return pathname.slice(basePath.length) || '/'
+  }
+
+  return pathname
+}
+
 function getCurrentPath() {
-  const path = window.location.pathname
+  const path = stripBasePath(window.location.pathname)
   return routes[path] ? path : '/'
 }
 
@@ -63,15 +74,18 @@ function App() {
 
   const handleNavigate = (path) => {
     if (!routes[path] || path === currentPath) return
-    window.history.pushState({}, '', path)
+    window.history.pushState({}, '', `${basePath}${path}`)
     setCurrentPath(path)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  const getHref = (path) => `${basePath}${path}`
 
   return (
     <Layout
       currentPath={currentPath}
       currentTitle={currentRoute.title}
+      getHref={getHref}
       onNavigate={handleNavigate}
     >
       {currentRoute.element}

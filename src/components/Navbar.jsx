@@ -9,12 +9,12 @@ const navItems = [
   { path: '/admin', label: 'Admin', icon: 'AD' },
 ]
 
-function Navbar({ currentPath, onNavigate }) {
+function Navbar({ currentPath, getHref, onNavigate }) {
   return (
     <aside className="navbar" aria-label="Navegacion principal">
       <a
         className="brand"
-        href="/"
+        href={getHref('/')}
         onClick={(event) => {
           event.preventDefault()
           onNavigate('/')
@@ -32,7 +32,7 @@ function Navbar({ currentPath, onNavigate }) {
           <a
             aria-current={currentPath === item.path ? 'page' : undefined}
             className={currentPath === item.path ? 'active' : undefined}
-            href={item.path}
+            href={getHref(item.path)}
             key={item.path}
             onClick={(event) => {
               event.preventDefault()
