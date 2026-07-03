@@ -2,6 +2,22 @@ import { useEffect, useState } from 'react'
 import { listResource } from '../services/api.js'
 import { asArray, pick } from '../utils/data.js'
 
+function PromotionImage({ promotion }) {
+  const [hasError, setHasError] = useState(false)
+  const imagenUrl = promotion?.imagenUrl
+  const nombre = pick(promotion, ['nombre', 'titulo'], 'Promocion')
+
+  if (!imagenUrl || hasError) {
+    return (
+      <div className="promotion-placeholder" aria-label="Imagen no disponible">
+        <span>Sin imagen</span>
+      </div>
+    )
+  }
+
+  return <img src={imagenUrl} alt={nombre} onError={() => setHasError(true)} />
+}
+
 function Promociones() {
   const [promociones, setPromociones] = useState([])
   const [loading, setLoading] = useState(true)
@@ -24,6 +40,9 @@ function Promociones() {
       {promociones.map((promotion, index) => (
         <article className="timeline-item" key={promotion.id ?? index}>
           <span></span>
+          <div className="promotion-image">
+            <PromotionImage promotion={promotion} />
+          </div>
           <div>
             <h2>{pick(promotion, ['nombre', 'titulo'], `Promocion ${pick(promotion, ['anio', 'gestion'], '')}`)}</h2>
             <p>{pick(promotion, ['descripcion', 'detalle'], 'Generacion del Colegio Carlos Medinaceli.')}</p>

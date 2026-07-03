@@ -17,7 +17,13 @@ async function request(path, options = {}) {
   if (response.status === 204) return null
 
   const text = await response.text()
-  return text ? JSON.parse(text) : null
+  if (!text) return null
+
+  try {
+    return JSON.parse(text)
+  } catch {
+    return text
+  }
 }
 
 export function listResource(resource) {
@@ -48,9 +54,8 @@ export function loginUser(credentials) {
   return request('/api/usuarios/login', {
     method: 'POST',
     body: JSON.stringify({
-      ...credentials,
-      usuario: credentials.username,
-      nombreUsuario: credentials.username,
+      username: credentials.username,
+      password: credentials.password,
     }),
   })
 }
@@ -58,9 +63,6 @@ export function loginUser(credentials) {
 export function sendContact(data) {
   return request('/api/contactos', {
     method: 'POST',
-    body: JSON.stringify({
-      ...data,
-      correo: data.email,
-    }),
+    body: JSON.stringify(data),
   })
 }

@@ -106,7 +106,7 @@ function Historia() {
       <article className="history-section">
         <h3>Datos biográficos de Carlos Medinaceli</h3>
         <p>
-          Don Carlos Medinaceli nació en la ciudad de Sucre el 30 de enero de
+          Don Carlos Medinaceli nació en la ciudad de Potosí el 30 de enero de
           1898, hijo de don Francisco Medinaceli Villegas y Carmen Quintana
           Carrasco. Sus estudios primarios los cursó en su ciudad natal; sus
           estudios secundarios comenzaron en el Colegio Junín y concluyeron en
@@ -130,7 +130,7 @@ function Historia() {
           libro “El Desprecio de Todos”. En 1920 fue invitado por el Ministro de
           Educación, Sr. Emilio Villanueva, para dictar literatura en el Liceo
           de Señoritas La Paz. En 1938 trabajó como profesor de Filosofía y
-          Literatura en la Escuela Nacional de Maestros de Sucre.
+          Literatura en la Escuela Nacional de Maestros de Potosí.
         </p>
         <p>
           En 1947 publicó en la editorial López de Buenos Aires su famosa novela

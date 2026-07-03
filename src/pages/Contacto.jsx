@@ -3,9 +3,10 @@ import { sendContact } from '../services/api.js'
 
 const initialForm = {
   nombre: '',
-  email: '',
-  telefono: '',
+  correo: '',
+  asunto: '',
   mensaje: '',
+  fecha: new Date().toISOString().slice(0, 10),
 }
 
 function Contacto() {
@@ -61,16 +62,20 @@ function Contacto() {
           <input name="nombre" value={form.nombre} onChange={handleChange} required />
         </label>
         <label>
-          Email
-          <input name="email" type="email" value={form.email} onChange={handleChange} required />
+          Correo
+          <input name="correo" type="email" value={form.correo} onChange={handleChange} required />
         </label>
         <label>
-          Telefono
-          <input name="telefono" value={form.telefono} onChange={handleChange} />
+          Asunto
+          <input name="asunto" value={form.asunto} onChange={handleChange} required />
         </label>
         <label>
           Mensaje
           <textarea name="mensaje" rows="5" value={form.mensaje} onChange={handleChange} required />
+        </label>
+        <label>
+          Fecha
+          <input name="fecha" type="date" value={form.fecha} onChange={handleChange} />
         </label>
         <button className="button primary" type="submit" disabled={loading}>
           {loading ? 'Enviando...' : 'Enviar mensaje'}

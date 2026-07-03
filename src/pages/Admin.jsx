@@ -13,8 +13,9 @@ const resources = {
     label: 'Noticias',
     fields: [
       { name: 'titulo', label: 'Titulo', required: true },
-      { name: 'contenido', label: 'Contenido', type: 'textarea', required: true },
+      { name: 'descripcion', label: 'Descripcion', type: 'textarea', required: true },
       { name: 'fecha', label: 'Fecha', type: 'date' },
+      { name: 'imagenUrl', label: 'URL de imagen', type: 'url' },
     ],
   },
   docentes: {
@@ -22,8 +23,10 @@ const resources = {
     fields: [
       { name: 'nombre', label: 'Nombre', required: true },
       { name: 'materia', label: 'Materia' },
-      { name: 'email', label: 'Email', type: 'email' },
+      { name: 'especialidad', label: 'Especialidad' },
+      { name: 'correo', label: 'Correo', type: 'email' },
       { name: 'telefono', label: 'Telefono' },
+      { name: 'fotoUrl', label: 'URL de foto', type: 'url' },
     ],
   },
   promociones: {
@@ -32,6 +35,7 @@ const resources = {
       { name: 'nombre', label: 'Nombre', required: true },
       { name: 'anio', label: 'Gestion', type: 'number' },
       { name: 'descripcion', label: 'Descripcion', type: 'textarea' },
+      { name: 'imagenUrl', label: 'URL de imagen', type: 'url' },
     ],
   },
   contactos: {
@@ -89,9 +93,13 @@ function Admin() {
     event.preventDefault()
     setLoginStatus('')
     try {
-      await loginUser(loginForm)
-      setAuthenticated(true)
-      setLoginForm(emptyLogin)
+      const response = await loginUser(loginForm)
+      console.log('Respuesta login:', response)
+      if (response === 'Login correcto' || response?.mensaje === 'Login correcto' || response) {
+        setAuthenticated(true)
+        setLoginStatus('')
+        setLoginForm(emptyLogin)
+      }
     } catch {
       setLoginStatus('Credenciales incorrectas o servidor no disponible.')
     }
@@ -278,11 +286,11 @@ function Admin() {
         {items.map((item, index) => (
           <article className="admin-row" key={getId(item) ?? index}>
             <div>
-              <h3>{pick(item, ['titulo', 'nombre', 'email'], `Registro ${index + 1}`)}</h3>
+              <h3>{pick(item, ['titulo', 'nombre', 'correo'], `Registro ${index + 1}`)}</h3>
               <p>
                 {pick(
                   item,
-                  ['contenido', 'descripcion', 'mensaje', 'materia', 'telefono'],
+                  ['descripcion', 'mensaje', 'materia', 'especialidad', 'telefono'],
                   'Sin detalle.',
                 )}
               </p>

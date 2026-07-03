@@ -18,13 +18,13 @@ function Home() {
     <>
       <section className="section intro-grid">
         <div>
-          <p className="eyebrow">Propuesta React + Spring Boot</p>
-          <h2>Una base visual lista para crecer hacia un sistema administrable</h2>
+          <p className="eyebrow">React + Spring Boot</p>
+          <h2>Sistema administrable conectado al backend</h2>
         </div>
         <p>
-          Esta primera estructura separa la experiencia publica del futuro panel
-          administrativo. Aun no consume la API desplegada, pero deja preparadas
-          las vistas principales del sitio.
+          El sistema permite mostrar noticias, docentes y promociones desde una
+          API Spring Boot desplegada en Render. Además, cuenta con un panel
+          administrativo para gestionar el contenido del sitio.
         </p>
       </section>
 
